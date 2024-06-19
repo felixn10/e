@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #767171;
+        }
+        header {
+            background-color: #333;
+            color: #e100ff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        section {
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #6506d1;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product h2 {
+            margin-top: 0;
+        }
+        .product p {
+            margin-bottom: 0;
+        }
+    </style>
+   <script>
+    function agregarAlCarrito(nombreProducto, precioProducto) {
+        // Crear un objeto de producto
+        var producto = {
+            nombre: nombreProducto,
+            precio: precioProducto
+        };
+        // Obtener la lista de carrito o crear una nueva si no existe
+        var carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        // Agregar el producto al carrito
+        carrito.push(producto);
+        // Guardar la lista de carrito en el almacenamiento local
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        // Actualizar el contador de productos en el carrito (opcional)
+        actualizarContadorCarrito(carrito.length);
+        // Mostrar un mensaje de confirmación (opcional)
+        alert("¡Producto agregado al carrito!");
+    }
+
+    function actualizarContadorCarrito(cantidad) {
+        // Actualizar el contador de productos en el carrito
+        document.getElementById("contadorCarrito").innerText = cantidad;
+    }
+
+    // Función para iniciar el proceso de pago
+    function iniciarPago() {
+        // Obtener el carrito del almacenamiento local
+        var carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        // Si el carrito está vacío, mostrar un mensaje
+        if (carrito.length === 0) {
+            alert("El carrito está vacío.");
+        } else {
+            // Aquí puedes implementar la lógica para el proceso de pago
+            // Por ejemplo, redirigir a una página de pago, mostrar un formulario, etc.
+            alert("Proceso de pago iniciado.");
+            // Una vez completado el pago, puedes limpiar el carrito
+            localStorage.removeItem("carrito");
+            actualizarContadorCarrito(0); // Actualizar contador a cero
+        }
+    }
+
+    // Esperar a que el DOM se cargue completamente
+    document.addEventListener("DOMContentLoaded", function() {
+        // Agregar event listener al botón de pagar
+        document.getElementById("botonPagar").addEventListener("click", iniciarPago);
+    });
+</script>
+</head>
+<body>
+    <header>
+        <h1>Tumbado Store</h1>
+    </header>
+    <nav>
+        <a href="#ofertas">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#contacto">Contacto</a>
+        <!-- Contador del carrito (opcional) -->
+        <span id="contadorCarrito">0</span>
+    </nav>
+    <button id="botonPagar" style="position: fixed; bottom: 20px; right: 20px;">Pagar</button>
+
+    <section id="ofertas">
+        <!-- Aquí van las imágenes con ofertas -->
+        <center>
+        <h2>Ofertas</h2>
+        <table>
+        <tr>
+            <td><center><img src="Productos de Calidad.png" alt="Oferta 1" width="500px" height="500px"></center> </td>
+
+        <td><center><img src="1714419522596.jpg" alt="Oferta 2" width="500px" height="500px"></center></td>
+
+        <td><center><img src="Productos de Calidad2.png" alt="Oferta 3" width="500px" height=500px></center></td>
+    </tr>
+    </table>
+</center>
+    </section>
+    <section id="productos" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <!-- Aquí van los productos -->
+        <div class="product">
+            <!-- Producto 1 -->
+            <center><img src="31bBuFObdhL._AC_SY580_DpWeblab_.jpg" alt="Producto 1"></center>
+            <h2>Gorra CT 1</h2>
+
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra negra con Logotipo CT color Dorado</p></h1>
+            <p>Precio: $500</p>
+            <button onclick="agregarAlCarrito('Gorra CT 1', 500)">Agregar al carrito</button>
+        </div>
+        <!-- Repite este bloque para más productos -->
+        <div class="product">
+            <!-- Producto 2 -->
+            <img src="c2e0ccfa6952f308e2259e781f7028a4.jpg" alt="Producto 2" width="500px" height=500px>
+            <h2>Gorra CT 2</h2>
+            
+            <h1
+            style="color: #fefefe;"
+
+            ><p>Gorra Blanca con Negro con Logotipo CT</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Gorra CT 2', 450)">Agregar al carrito</button>
+        </div>
+        <!-- Fin de bloque de producto -->
+        <!-- Repite este bloque para más productos -->
+        <div class="product" >
+            <!-- Producto 3 -->
+            <img src="Gorra Blanca CT Logotipo Azul.jpg" alt="Producto 3"width="500px" height=500px>
+            <h2>Gorra CT 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra Blanca con Azul y logotipo CT Azul</p>
+            <p>Precio: $500</p>
+            <button onclick="agregarAlCarrito('Gorra CT 3', 500)">Agregar al carrito</button>
+        </div>
+        <!-- Fin de bloque de producto -->
+        <!-- Repite este bloque para más productos -->
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Gorra Café CT Logotipo.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Gorra CT 4</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra Kaki con negro y Logotipo CT</p>
+            <p>Precio: $500</p>
+            <button onclick="agregarAlCarrito('Gorra CT 4', 500)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Gorra Negra Natanael Cano Logotipo Dorado.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Gorra Natanael Cano 1</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra negra con Logotipo Natanael Cano color Dorado</p>
+            <p>Precio: $500</p>
+            <button onclick="agregarAlCarrito('Gorra Natanael Cano 1', 500)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Gorra Negra Natanael Cano Logotipo Blanco.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Gorra Natanael Cano 2</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra Negra con Logotipo Natanael Cano color Blanco</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Gorra Natanael Cano 2', 450)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Gorra Negra Natanael Cano Logotipo Rojo.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Gorra Natanael Cano 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Gorra negra con Logotipo Natanael Cano color Rojo</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Gorra Natanael Cano 3', 450)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Playera Natanael Cano Nata Corridos Tumbados Ct D7.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera CT 1</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con Logotipo CT</p>
+            <p>Precio: $200</p>
+            <button onclick="agregarAlCarrito('Producto 4', 200)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Natanael Cano Ct  Infantil.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera CT 2</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con Logotipo CT y Natanael Cano</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera CT 2', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="PLAYERA NATANAEL CANO CT RAYOS.jpeg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera CT 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con Logotipo CT de Rayos.</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera CT 3',250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Playera Logo Dorado Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera Natanael Cano 1</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con Logotipo Natanael Cano color Dorado.</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera Natanael Cano 1', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Natanael Cano CT Corridos Tumbados Blanca.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera Natanael Cano 2</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera blanca con Logotipo Natanael Cano y mini Logotipo CT.</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera Natanael Cano 2', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Natanael Cano CT Corridos Tumbados - playera de manga corta para hombre y mujer.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera Natanael Cano 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con Logotipo Natanael Cano y mini Logotipo CT.</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera Natanael Cano 3', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="CT - Corridos tumbados NataKong.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera Nata Kong</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera negra con diseño del álbum "Nata Kong"</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera Nata Kong', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Natanael Cano Amor Tumbado Camiseta.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera Amor Tumbado</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera con diseño del álbum "Amor Tumbado".</p>
+            <p>Precio: $250</p>
+            <button onclick="agregarAlCarrito('Playera Amor Tumbado', 250)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Playera Madonna Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Playera "MADONNA" Natanael Cano & Oscar Maydon</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Playera con diseño de la canción "MADONNA"</p>
+            <p>Precio: $200</p>
+            <button onclick="agregarAlCarrito('Playera Madonna', 200)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cojin Negro Logotipo CT.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cojin CT 1</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cojin negro con Logotipo CT.</p>
+            <p>Precio: $300</p>
+            <button onclick="agregarAlCarrito('Cojin CT 1', 300)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cojin Rosa CT Logotipo.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cojin CT 2</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cojin rosa con Logotipo CT color rosa</p>
+            <p>Precio: $300</p>
+            <button onclick="agregarAlCarrito('Cojin CT 2', 300)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cojin Rojo CT Logotipo.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cojin CT 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cojin rojo con Logotipo CT.</p>
+            <p>Precio: $300</p>
+            <button onclick="agregarAlCarrito('Cojin CT 3', 300)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cojin Blanco Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cojin Natanael Cano</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cojin con diseño de Natanael Cano</p>
+            <p>Precio: $350</p>
+            <button onclick="agregarAlCarrito('Cojin de Natanael Cano', 350)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cojin Peluche Natanael Cano Chiquito.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Peluche Cojin Natanael Cano</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Peluche cojin de Mini Natanael Cano.</p>
+            <p>Precio: $350</p>
+            <button onclick="agregarAlCarrito('Peluche cojin Natanael cano', 350)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Peluche Perezoso CT.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Peluche Perezoso CT</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Peluche del Perezoso del Logotipo CT</p>
+            <p>Precio: $400</p>
+            <button onclick="agregarAlCarrito('Peluche Perezoso CT', 400)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cobija San Nata.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cobija Natanael Cano 1</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cobija con diseño de San Nata</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Cobija con diseño de San Nata', 450)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cobija Roja Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cobija Natanael Cano 2</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cobija roja con diseño de Natanael Cano.</p>
+            <p>Precio: $400</p>
+            <button onclick="agregarAlCarrito('Cobija Natanael Cano 2', 400)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cobija Natanael Cano fondo Negro.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cobija Natanael Cano 3</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cobija negra con diseño de Natanael Cano y Logotipo CT</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Cobija Natanael Cano 3', 450)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cobija Nata Montana Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cobija Natanael Cano 4</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cobija con diseño de Natanael Cano y el album Nata Montana</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Cobija Natanael Cano 4', 450)">Agregar al carrito</button>
+        </div>
+        <div class="product">
+            <!-- Producto 4 -->
+            <img src="Cobija El DRIP Natanael Cano.jpg" alt="Producto 4"width="500px" height=500px>
+            <h2>Cobija Natanael Cano 5</h2>
+            <h1
+            style="color: #fefefe;"
+            
+            ><p>Cobija con diseño de la cnción El DRIP</p>
+            <p>Precio: $450</p>
+            <button onclick="agregarAlCarrito('Cobija Natanael Cano 5', 450)">Agregar al carrito</button>
+        </div>
+        <!-- Fin de bloque de producto -->
+        <!-- Repite este bloque para más productos -->
+        <!-- Fin de bloque de producto -->
+    </section>
+
+    <center><h2>Formulario de Contacto</h2></center>
+    
+    <form id="contactForm">
+        <div>
+            <center> <label for="nombre">Nombre:</label></center>
+            <center><input type="text" id="nombre" name="nombre"></center>
+            <center><span id="nombreError" class="error"></span></center>
+        </div>
+        <div>
+            <center><label for="telefono">Teléfono:</label></center>
+            <center><input type="tel" id="telefono" name="telefono"></center>
+            <center><span id="telefonoError" class="error"></span></center>
+        </div>
+        <div>
+            <center><label for="correo">Correo:</label></center>
+            <center><input type="email" id="correo" name="correo"></center>
+            <center><span id="correoError" class="error"></span></center>
+        </div>
+        <center><button type="submit">Enviar</button></center>
+    </form>
+    
+    <script>
+        const form = document.getElementById('contactForm');
+    
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                // Aquí podrías enviar los datos del formulario a un servidor o hacer cualquier otra cosa con ellos
+                alert('¡Formulario enviado correctamente!');
+                form.reset();
+            }
+        });
+    
+        function validateForm() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+    
+            let valid = true;
+    
+            // Validar nombre
+            if (nombre === '') {
+                document.getElementById('nombreError').textContent = 'Por favor ingresa tu nombre';
+                valid = false;
+            } else {
+                document.getElementById('nombreError').textContent = '';
+            }
+    
+            // Validar teléfono (solo caracteres numéricos)
+            const telefonoPattern = /^[0-9]+$/;
+            if (telefono === '' || !telefonoPattern.test(telefono)) {
+                document.getElementById('telefonoError').textContent = 'Por favor ingresa un número de teléfono válido';
+                valid = false;
+            } else {
+                document.getElementById('telefonoError').textContent = '';
+            }
+    
+            // Validar correo electrónico
+            const correoPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (correo === '' || !correoPattern.test(correo)) {
+                document.getElementById('correoError').textContent = 'Por favor ingresa un correo electrónico válido';
+                valid = false;
+            } else {
+                document.getElementById('correoError').textContent = '';
+            }
+    
+            return valid;
+        }
+    </script>
+     <section id="contacto">
+        <!-- Información de contacto -->
+        <style></style>
+        <center><h2>Contacto</h2></center>
+        <center><p>Ubicación: Av. Pie de la Cuesta 1048, Anexo a la Ecología, 76148 Santiago de Querétaro, Qro.</p></center>
+        <center><p>Número de teléfono: 442 571 8378</p></center>
+        <center><p>Correo electrónico: info@tumbadostore.com</p></center>
+    </section>
+    <footer>
+        <center><p>&copy; 2024 Tienda de Productos Natanael Cano</p></center>
+    </footer>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+    </head>
+    <body>
+    </body>
+    </html>
+    
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tienda de Productos</title>
+        <style>
+            /* Estilos del modal */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+            }
+    
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px;
+                border-radius: 10px;
+            }
+    
+            /* Estilos para el botón de cerrar */
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            // Función para iniciar el proceso de pago
+            function iniciarPago() {
+                // Mostrar el modal
+                document.getElementById("myModal").style.display = "block";
+            }
+    
+            // Función para cerrar el modal
+            function cerrarModal() {
+                document.getElementById("myModal").style.display = "none";
+            }
+    
+            // Función para procesar los datos bancarios
+            function procesarPago() {
+                // Aquí puedes agregar la lógica para procesar los datos bancarios
+                // Por ejemplo, validar los datos, enviarlos a un servidor, etc.
+                alert("Datos bancarios enviados correctamente. Procesando pago...");
+    
+                // Cerrar el modal
+                cerrarModal();
+    
+                // Limpiar el carrito y actualizar el contador a cero
+                localStorage.removeItem("carrito");
+                actualizarContadorCarrito(0);
+            }
+        </script>
+    </head>
+    <body>
+        <!-- Header y otros elementos omitidos para mantener el foco en la funcionalidad del pago -->
+    
+        <!-- Botón para pagar productos -->
+        <button id="botonPagar" style="position: fixed; bottom: 20px; right: 20px;" onclick="iniciarPago()">Pagar</button>
+    
+        <!-- Modal para ingresar datos bancarios -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal()">&times;</span>
+                <h2>Ingrese sus datos bancarios</h2>
+                <!-- Formulario para ingresar datos bancarios -->
+                <form id="datosBancariosForm" onsubmit="event.preventDefault(); procesarPago();">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required><br><br>
+                    <label for="tarjeta">Número de Tarjeta:</label>
+                    <input type="text" id="tarjeta" name="tarjeta" required><br><br>
+                    <!-- Otros campos de datos bancarios según sea necesario -->
+                    <button type="submit">Pagar</button>
+                </form>
+            </div>
+        </div>
+    
+        <!-- Contenido principal y otros elementos omitidos -->
+    
+        <script>
+            // Agregar event listener al botón de pagar
+            document.getElementById("botonPagar").addEventListener("click", iniciarPago);
+        </script>
+    </body>
+    </html>
